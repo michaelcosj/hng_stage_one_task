@@ -16,7 +16,7 @@ class AppController extends Controller
     public function __invoke(Request $request)
     {
         $ip = $request->header("Fly-Client-IP", $request->ip());
-        $visitor["name"] = $request->input("visitor_name");
+        $visitor["name"] = $request->query("visitor_name", "Anon");
 
         // random ip for debugging, not mine
         // $ip = "102.80.23.161";
@@ -64,7 +64,7 @@ class AppController extends Controller
         return [
             "client_ip" => $ip,
             "location" => $visitor["city"],
-            "greeting" => "Hello, {$visitor["name"]}!, the temperature is {$visitor["temp"]} degrees celcius in {$visitor["city"]}",
+            "greeting" => "Hello, {$visitor["name"]}!, the temperature is {$visitor["temp"]} degrees Celcius in {$visitor["city"]}",
         ];
     }
 }
